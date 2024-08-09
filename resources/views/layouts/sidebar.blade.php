@@ -11,41 +11,50 @@
             data-kt-scroll-dependencies="#kt_app_header, #kt_app_header" data-kt-scroll-wrappers="#kt_app_sidebar_menu"
             data-kt-scroll-offset="20px">
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('order.*') ? "active" : "" }}" href="{{ route('order.index') }}">
-                    <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                    </span>
-                    <span class="menu-title">Order</span>
-                </a>
-            </div>
+            @role('admin')
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('admin.book.*') ? 'active' : '' }}"
+                        href="{{ route('book.index') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Book</span>
+                    </a>
+                </div>
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('type.*') ? "active" : "" }}" href="{{ route('type.index') }}">
-                    <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                    </span>
-                    <span class="menu-title">Tipe Produk</span>
-                </a>
-            </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('admin.category.*') ? 'active' : '' }}"
+                        href="{{ route('category.index') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </div>
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('product.*') ? "active" : "" }}" href="{{ route('product.index') }}">
-                    <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                    </span>
-                    <span class="menu-title">List Produk</span>
-                </a>
-            </div>
+                @elserole('user')
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->routeIs('wd.*') ? "active" : "" }}" href="{{ route('product.index') }}">
-                    <span class="menu-bullet">
-                        <span class="bullet bullet-dot"></span>
-                    </span>
-                    <span class="menu-title">Konten</span>
-                </a>
-            </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('book.*') ? 'active' : '' }}"
+                        href="{{ route('book.index') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Book</span>
+                    </a>
+                </div>
+
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->routeIs('category.*') ? 'active' : '' }}"
+                        href="{{ route('category.index') }}">
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Category</span>
+                    </a>
+                </div>
+            @endrole
+
         </div>
     </div>
 </div>
