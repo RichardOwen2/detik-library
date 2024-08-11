@@ -2,7 +2,9 @@
 
 namespace App\Services\User;
 
+use App\Exports\BookExport;
 use App\Models\Book;
+use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -91,5 +93,12 @@ class BookService
         }
 
         $book->delete();
+    }
+
+    public function export($user_id)
+    {
+        $books = Book::where('user_id', $user_id)->get();
+
+        return Excel::download(new BookExport($books), 'books.xlsx');
     }
 }

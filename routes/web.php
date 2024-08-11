@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/book/{id}', 'show')->name('books.show');
             Route::post('/book/{id}', 'update')->name('books.update');
             Route::delete('/book/{id}', 'destroy')->name('books.destroy');
+            Route::get('/export', 'export')->name('books.export');
         });
     });
 
@@ -74,6 +75,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/book/{id}', 'show')->name('admin.books.show');
                 Route::post('/book/{id}', 'update')->name('admin.books.update');
                 Route::delete('/book/{id}', 'destroy')->name('admin.books.destroy');
+                Route::get('/export', 'export')->name('admin.books.export');
             });
         });
     });

@@ -122,4 +122,9 @@ class BookController extends Controller
             'message' => 'Buku berhasil dihapus',
         ]);
     }
+
+    public function export()
+    {
+        return $this->bookService->export(auth()->id());
+    }
 }

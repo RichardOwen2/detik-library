@@ -13,7 +13,7 @@
 
         <div class="d-flex">
             <div class="card-toolbar me-2">
-                <a href="#" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_add_book">
+                <a href="{{ route('books.export') }}" target="_blank" class="btn btn-sm btn-success">
                     Export Buku
                 </a>
             </div>
