@@ -2,8 +2,8 @@
 @section('title', 'Category')
 
 @section('modal')
-    @include('pages.admin.categories.admin.modal.add')
-    @include('pages.admin.categories.admin.modal.edit')
+    @include('pages.admin.categories.modal.add')
+    @include('pages.admin.categories.modal.edit')
 @endsection
 
 @section('content')
@@ -26,6 +26,7 @@
                     <thead>
                         <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">
                             <th class="w-50px text-center">NO</th>
+                            <th>KREATOR</th>
                             <th>NAMA KATEGORI</th>
                             <th>JUMLAH BUKU</th>
                             <th class="text-center">ACTION</th>
@@ -58,7 +59,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: "{{ route('categories.admin.destroy', '') }}" + '/' + id,
+                        url: "{{ route('admin.categories.destroy', '') }}" + '/' + id,
                         type: 'DELETE',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -100,7 +101,7 @@
                 deferRender: true,
                 responsive: false,
                 ajax: {
-                    url: "{{ route('categories.admin.datatable') }}",
+                    url: "{{ route('admin.categories.datatable') }}",
                 },
                 language: {
                     "lengthMenu": "Show _MENU_",
@@ -125,6 +126,9 @@
                         searchable: false
                     },
                     {
+                        data: 'creator'
+                    },
+                    {
                         data: 'name'
                     },
                     {
@@ -138,7 +142,7 @@
                     "regex": true
                 },
                 columnDefs: [{
-                    targets: [0, 2],
+                    targets: [0, 3],
                     className: 'text-center',
                 }, ],
             });

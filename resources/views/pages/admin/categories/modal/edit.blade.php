@@ -43,7 +43,7 @@
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
             );
             $.ajax({
-                url: "{{ route('categories.admin.update', '') }}" + '/' + $('input[name="id"]').val(),
+                url: "{{ route('admin.categories.update', '') }}" + '/' + $('input[name="id"]').val(),
                 type: 'POST',
                 data: formData,
                 contentType: false,

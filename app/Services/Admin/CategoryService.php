@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Models\Category;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class CategoryService.
@@ -61,5 +62,24 @@ class CategoryService
         }
 
         $category->delete();
+    }
+
+    public function datatable($user_id)
+    {
+        $query = Category::query();
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('action', function ($query) {
+                return view('pages.user.categories.menu', compact('query'));
+            })
+            ->addColumn('book_count', function ($query) {
+                return $query->books->count() . ' Buku';
+            })
+            ->addColumn('creator', function ($query) {
+                return $query->user->name;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

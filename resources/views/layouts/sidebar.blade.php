@@ -14,7 +14,7 @@
             @role('admin')
                 <div class="menu-item">
                     <a class="menu-link {{ request()->routeIs('admin.books.*') ? 'active' : '' }}"
-                        href="{{ route('books.index') }}">
+                        href="{{ route('admin.books.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
@@ -24,7 +24,7 @@
 
                 <div class="menu-item">
                     <a class="menu-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"
-                        href="{{ route('categories.index') }}">
+                        href="{{ route('admin.categories.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>

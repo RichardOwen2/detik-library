@@ -94,12 +94,6 @@
                         <div class="menu-item px-5">
                             <a href="{{ route('logout') }}" class="menu-link px-5">Sign Out</a>
                         </div>
-
-                        <div class="menu-item px-5">
-                            <a href="/" class="menu-link px-5">
-                                Go to Homepage
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="app-navbar-item d-flex align-items-center d-lg-none ms-1 me-n2">

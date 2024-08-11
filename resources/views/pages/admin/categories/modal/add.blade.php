@@ -41,7 +41,7 @@
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
             );
             $.ajax({
-                url: "{{ route('categories.admin.store') }}",
+                url: "{{ route('admin.categories.store') }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,

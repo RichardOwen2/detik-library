@@ -18,8 +18,8 @@ class RedirectIfHasRole
         /** @var App\Models\User */
         $user = auth()->user();
 
-        if ($user->hasRole($role)) {
-            return redirect($redirectTo);
+        if ($user->getRoleNames()[0] === $role) {
+            return redirect(route($redirectTo));
         }
 
         return $next($request);

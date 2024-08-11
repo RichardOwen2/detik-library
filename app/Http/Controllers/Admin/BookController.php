@@ -19,11 +19,15 @@ class BookController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        // $categories =
+        $category_id = ($request->category_id === '*' || !$request->category_id) ? null : $request->category_id;
+        $books = $this->bookService->get($category_id);
+        $categories = $this->categoryService->get();
 
-        return view('pages.user.books.index');
+        return view('pages.admin.books.index', compact([
+            'categories', 'books',
+        ]));
     }
 
     public function store(Request $request)
@@ -33,14 +37,14 @@ class BookController extends Controller
             'category_id' => 'required',
             'description' => 'required',
             'amount' => 'required',
-            'cover' => 'required|image',
-            'file' => 'required|file',
+            'cover' => 'required|image|mimes:jpeg,png,jpg',
+            'file' => 'required|file|mimes:pdf',
         ]);
 
         $cover = $request->file('cover');
         $file = $request->file('file');
 
-        $category = $this->categoryService->find(auth()->id(), $request->category_id);
+        $category = $this->categoryService->find($request->category_id);
 
         if (!$category) {
             throw new HttpException(404, 'Kategori tidak ditemukan');
@@ -65,8 +69,11 @@ class BookController extends Controller
     public function show($id)
     {
         $book = $this->bookService->find($id);
+        $categories = $this->categoryService->get();
 
-        return view('pages.user.books.detail.index', compact('book'));
+        return view('pages.admin.books.detail.index', compact([
+            'book', 'categories',
+        ]));
     }
 
     public function update(Request $request, $id)
@@ -76,8 +83,8 @@ class BookController extends Controller
             'category_id' => 'required',
             'description' => 'required',
             'amount' => 'required',
-            'cover' => 'image',
-            'file' => 'file',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg',
+            'file' => 'nullable|file|mimes:pdf',
         ]);
 
         $cover = $request->file('cover');

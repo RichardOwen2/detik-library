@@ -23,7 +23,9 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            if (Auth::user()->getRoleNames()[0] === 'admin') {
+            /** @var App\Models\User */
+            $user = Auth::user();
+            if ($user->getRoleNames()[0] === 'admin') {
                 return redirect()->route('admin.books.index');
             }
 

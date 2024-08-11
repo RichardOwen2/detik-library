@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal_add_book" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modal_edit_book" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <div class="modal-content">
             <div class="modal-header flex-stack align-items-center">
@@ -8,8 +8,10 @@
                 </div>
             </div>
 
-            <form class="modal-body pt-10 pb-15 px-lg-17" id="form_add_book">
+            <form class="modal-body pt-10 pb-15 px-lg-17" id="form_edit_book">
                 <div class="px-3" style="max-height: 400px; overflow-y: auto;">
+                    <input type="text" name="id" hidden>
+
                     <div class="fv-row mb-3">
                         <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                             <span class="required">Kategori Buku</span>
@@ -58,7 +60,7 @@
                         <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                             <span class="required">Cover Buku (png/jpg/jpge)</span>
                         </label>
-                        <input type="file" class="form-control form-control-lg form-control-solid" name="cover" required
+                        <input type="file" class="form-control form-control-lg form-control-solid" name="cover"
                             placeholder="" value="">
                     </div>
 
@@ -66,7 +68,7 @@
                         <label class="d-flex align-items-center fs-5 fw-semibold mb-2">
                             <span class="required">File Buku (pdf)</span>
                         </label>
-                        <input type="file" class="form-control form-control-lg form-control-solid" name="file" required
+                        <input type="file" class="form-control form-control-lg form-control-solid" name="file"
                             placeholder="" value="">
                     </div>
                 </div>
@@ -85,15 +87,15 @@
 
 <script>
     $(document).ready(function() {
-        $('#form_add_book').on('submit', function(e) {
+        $('#form_edit_book').on('submit', function(e) {
             e.preventDefault();
             const formData = new FormData(this);
-            $('#form_add_book [type="submit"]').attr('disabled', true);
-            $('#form_add_book [type="submit"]').html(
+            $('#form_edit_book [type="submit"]').attr('disabled', true);
+            $('#form_edit_book [type="submit"]').html(
                 '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
             );
             $.ajax({
-                url: "{{ route('admin.books.store') }}",
+                url: "{{ route('admin.books.update', $book->id) }}",
                 type: 'POST',
                 data: formData,
                 contentType: false,
@@ -103,18 +105,18 @@
                 },
                 success: function(data) {
                     toastr.success(data.message, 'Selamat 🚀 !');
-                    $('#form_add_book [type="submit"]').attr('disabled', false);
-                    $('#form_add_book [type="submit"]').html('Simpan')
-                    $('#modal_add_book').modal('hide');
+                    $('#form_edit_book [type="submit"]').attr('disabled', false);
+                    $('#form_edit_book [type="submit"]').html('Simpan')
+                    $('#modal_edit_book').modal('hide');
 
-                    $('#form_add_book').trigger('reset');
+                    $('#form_edit_book').trigger('reset');
                     window.location.reload();
                 },
                 error: function(xhr, status, error) {
                     const data = xhr.responseJSON;
                     toastr.error(data.message, 'Opps!');
-                    $('#form_add_book [type="submit"]').attr('disabled', false);
-                    $('#form_add_book [type="submit"]').html('Simpan')
+                    $('#form_edit_book [type="submit"]').attr('disabled', false);
+                    $('#form_edit_book [type="submit"]').html('Simpan')
                 }
             });
         });

@@ -17,7 +17,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        return view('pages.user.categories.index');
+        return view('pages.admin.categories.index');
     }
 
     public function store(Request $request)
@@ -56,5 +56,10 @@ class CategoryController extends Controller
             'status' => 'success',
             'message' => 'Kategori berhasil dihapus',
         ]);
+    }
+
+    public function datatable()
+    {
+        return $this->categoryService->datatable(auth()->id());
     }
 }
