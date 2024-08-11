@@ -10,9 +10,15 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class BookService
 {
-    public function get($user_id)
+    public function get($user_id, $category_id = null)
     {
-        return Book::where('user_id', $user_id)->get();
+        $books = Book::where('user_id', $user_id);
+
+        if ($category_id) {
+            $books->where('category_id', $category_id);
+        }
+
+        return $books->get();
     }
 
     public function getWithPagination($user_id, $page = 1, $count = 10)

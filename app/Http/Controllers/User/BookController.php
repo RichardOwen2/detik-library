@@ -19,9 +19,15 @@ class BookController extends Controller
         $this->categoryService = $categoryService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.user.books.index');
+        $category_id = ($request->category_id === '*' || !$request->category_id) ? null : $request->category_id;
+        $books = $this->bookService->get(auth()->id(), $category_id);
+        $categories = $this->categoryService->get(auth()->id());
+
+        return view('pages.user.books.index', compact([
+            'categories', 'books',
+        ]));
     }
 
     public function store(Request $request)
@@ -31,8 +37,8 @@ class BookController extends Controller
             'category_id' => 'required',
             'description' => 'required',
             'amount' => 'required',
-            'cover' => 'required|image',
-            'file' => 'required|file',
+            'cover' => 'required|image|mimes:jpeg,png,jpg',
+            'file' => 'required|file|mimes:pdf',
         ]);
 
         $cover = $request->file('cover');
@@ -63,8 +69,11 @@ class BookController extends Controller
     public function show($id)
     {
         $book = $this->bookService->find(auth()->id(), $id);
+        $categories = $this->categoryService->get(auth()->id());
 
-        return view('pages.user.books.show', compact('book'));
+        return view('pages.user.books.detail.index', compact([
+            'book', 'categories',
+        ]));
     }
 
     public function update(Request $request, $id)
@@ -74,8 +83,8 @@ class BookController extends Controller
             'category_id' => 'required',
             'description' => 'required',
             'amount' => 'required',
-            'cover' => 'image',
-            'file' => 'file',
+            'cover' => 'nullable|image|mimes:jpeg,png,jpg',
+            'file' => 'nullable|file|mimes:pdf',
         ]);
 
         $cover = $request->file('cover');

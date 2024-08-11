@@ -21,6 +21,8 @@ class BookController extends Controller
 
     public function index()
     {
+        // $categories =
+
         return view('pages.user.books.index');
     }
 
@@ -64,7 +66,7 @@ class BookController extends Controller
     {
         $book = $this->bookService->find($id);
 
-        return view('pages.user.books.show', compact('book'));
+        return view('pages.user.books.detail.index', compact('book'));
     }
 
     public function update(Request $request, $id)
