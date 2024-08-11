@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>DETIK LIBRARY</title>
+    <title>@yield('title', 'DETIK LIBRARY') | DETIK LIBRARY</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -45,11 +45,11 @@
 
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
-            @include('layouts.admin.header')
+            @include('layouts.header')
 
             <div class="app-wrapper d-flex" id="kt_app_wrapper">
                 <div class="app-container container-fluid d-flex">
-                    @include('layouts.admin.sidebar')
+                    @include('layouts.sidebar')
 
                     <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
                         <div class="d-flex flex-column flex-column-fluid">

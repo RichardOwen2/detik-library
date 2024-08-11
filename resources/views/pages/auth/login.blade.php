@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>DETIK LIBRARY</title>
+    <title>LOGIN | DETIK LIBRARY</title>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="{{ asset('metronic') }}/media/logos/favicon.ico" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700" />
@@ -43,27 +43,33 @@
         <div class="d-flex flex-column flex-lg-row flex-column-fluid">
             <div class="d-flex flex-lg-row-fluid">
                 <div class="d-flex flex-column flex-center pb-0 pb-lg-10 p-10 w-100">
-                    <img class="theme-light-show mx-auto mw-200 w-150px w-lg-500px mb-10 mb-lg-20"
-                        src="{{ asset('logo/logo_black.png') }}" alt="" />
-                    <img class="theme-dark-show mx-auto mw-200 w-150px w-lg-500px mb-10 mb-lg-20"
-                        src="{{ asset('logo/logo_white.png') }}" alt="" />
-                    {{-- <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-4">
-                        Pelayanan Terbaik, Kepuasan Terjamin
+                    <img class="theme-light-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                        src="{{ asset('metronic') }}/media/auth/agency.png" alt="" />
+                    <img class="theme-dark-show mx-auto mw-100 w-150px w-lg-300px mb-10 mb-lg-20"
+                        src="{{ asset('metronic') }}/media/auth/agency-dark.png" alt="" />
+                    <h1 class="text-gray-800 fs-2qx fw-bold text-center mb-4">
+                        Selamat Datang di DETIK LIBRARY
                     </h1>
                     <div class="text-gray-600 fs-base text-center fw-semibold">
-                        Berikan yang terbaik kepada pelanggan, pastikan proses yang mulus, dan pastikan kepuasan mereka.
-                    </div> --}}
+                        Silahkan login untuk melanjutkan
+                    </div>
                 </div>
             </div>
             <div class="d-flex flex-column-fluid flex-lg-row-auto justify-content-center justify-content-lg-end p-12">
                 <div class="bg-body d-flex flex-column flex-center rounded-4 w-md-600px p-10">
                     <div class="d-flex flex-center flex-column align-items-stretch h-lg-100 w-md-400px">
                         <div class="d-flex flex-center flex-column flex-column-fluid pb-15 pb-lg-20">
+
                             <form class="form w-100" action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="text-center mb-11">
                                     <h1 class="text-gray-900 fw-bolder mb-3">Sign In</h1>
                                 </div>
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                @endif
                                 <div class="fv-row mb-8">
                                     <input type="text" placeholder="Email" name="email" autocomplete="off"
                                         class="form-control bg-transparent @if (session('error')) is-invalid @endif" />
@@ -71,12 +77,12 @@
                                 <div class="fv-row mb-3">
                                     <input type="password" placeholder="Password" name="password" autocomplete="off"
                                         class="form-control bg-transparent @if (session('error')) is-invalid @endif" />
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>Email atau password salah</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>Email atau password salah</strong>
+                                    </span>
                                 </div>
                                 <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                                    <div></div>
+
                                 </div>
                                 <div class="d-grid mb-10">
                                     <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
@@ -85,6 +91,14 @@
                                             <span
                                                 class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                     </button>
+                                </div>
+
+                                <div class="text-gray-500 text-center fw-semibold fs-6">
+                                    Belum punya akun?
+
+                                    <a href="{{ route('register') }}" class="link-primary">
+                                        Daftar
+                                    </a>
                                 </div>
                             </form>
                         </div>

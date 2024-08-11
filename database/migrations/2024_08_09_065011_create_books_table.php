@@ -22,7 +22,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreignId('user_id')->constrained('users');
-            $table->foreign('category_id')->references('id')->on('category_id');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

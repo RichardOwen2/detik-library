@@ -57,4 +57,9 @@ class CategoryController extends Controller
             'message' => 'Kategori berhasil dihapus',
         ]);
     }
+
+    public function datatable()
+    {
+        return $this->categoryService->datatable(auth()->id());
+    }
 }

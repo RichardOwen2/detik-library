@@ -13,8 +13,8 @@
 
             @role('admin')
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.book.*') ? 'active' : '' }}"
-                        href="{{ route('book.index') }}">
+                    <a class="menu-link {{ request()->routeIs('admin.books.*') ? 'active' : '' }}"
+                        href="{{ route('books.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
@@ -23,20 +23,20 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('admin.category.*') ? 'active' : '' }}"
-                        href="{{ route('category.index') }}">
+                    <a class="menu-link {{ request()->routeIs('admin.categories.*') ? 'active' : '' }}"
+                        href="{{ route('categories.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
                         <span class="menu-title">Category</span>
                     </a>
                 </div>
+            @endrole
 
-                @elserole('user')
-
+            @role('user')
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('book.*') ? 'active' : '' }}"
-                        href="{{ route('book.index') }}">
+                    <a class="menu-link {{ request()->routeIs('books.*') ? 'active' : '' }}"
+                        href="{{ route('books.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>
@@ -45,8 +45,8 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('category.*') ? 'active' : '' }}"
-                        href="{{ route('category.index') }}">
+                    <a class="menu-link {{ request()->routeIs('categories.*') ? 'active' : '' }}"
+                        href="{{ route('categories.index') }}">
                         <span class="menu-bullet">
                             <span class="bullet bullet-dot"></span>
                         </span>

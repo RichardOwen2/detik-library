@@ -4,6 +4,7 @@ namespace App\Services\User;
 
 use App\Models\Category;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Yajra\DataTables\Facades\DataTables;
 
 /**
  * Class CategoryService.
@@ -56,6 +57,26 @@ class CategoryService
             throw new HttpException(404, 'Kategori tidak ditemukan');
         }
 
+        if ($category->books->count() > 0) {
+            throw new HttpException(400, 'Kategori tidak bisa dihapus karena memiliki buku');
+        }
+
         $category->delete();
+    }
+
+    public function datatable($user_id)
+    {
+        $query = Category::where('user_id', $user_id);
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('action', function ($query) {
+                return view('pages.user.categories.menu', compact('query'));
+            })
+            ->addColumn('book_count', function ($query) {
+                return $query->books->count() . ' Buku';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
     }
 }

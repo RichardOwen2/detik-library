@@ -31,13 +31,15 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::middleware('not_role:admin')->group(function () {
+    Route::middleware('not_role:admin,/admin')->group(function () {
         Route::prefix('category')->group(function () {
             Route::controller(User\CategoryController::class)->group(function () {
                 Route::get('/', 'index')->name('categories.index');
                 Route::post('/', 'store')->name('categories.store');
-                Route::put('/{id}', 'update')->name('categories.update');
+                Route::post('/{id}', 'update')->name('categories.update');
                 Route::delete('/{id}', 'destroy')->name('categories.destroy');
+
+                Route::get('/datatable', 'datatable')->name('categories.datatable');
             });
         });
 
@@ -45,7 +47,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('books.index');
             Route::post('/', 'store')->name('books.store');
             Route::get('/{id}', 'show')->name('books.show');
-            Route::put('/{id}', 'update')->name('books.update');
+            Route::post('/{id}', 'update')->name('books.update');
             Route::delete('/{id}', 'destroy')->name('books.destroy');
         });
     });
@@ -54,19 +56,19 @@ Route::middleware('auth')->group(function () {
         Route::middleware('role:admin')->group(function () {
             Route::prefix('category')->group(function () {
                 Route::controller(Admin\CategoryController::class)->group(function () {
-                    Route::get('/', 'index')->name('categories.index');
-                    Route::post('/', 'store')->name('categories.store');
-                    Route::put('/{id}', 'update')->name('categories.update');
-                    Route::delete('/{id}', 'destroy')->name('categories.destroy');
+                    Route::get('/', 'index')->name('admin.categories.index');
+                    Route::post('/', 'store')->name('admin.categories.store');
+                    Route::post('/{id}', 'update')->name('admin.categories.update');
+                    Route::delete('/{id}', 'destroy')->name('admin.categories.destroy');
                 });
             });
 
             Route::controller(Admin\BookController::class)->group(function () {
-                Route::get('/', 'index')->name('books.index');
-                Route::post('/', 'store')->name('books.store');
-                Route::get('/{id}', 'show')->name('books.show');
-                Route::put('/{id}', 'update')->name('books.update');
-                Route::delete('/{id}', 'destroy')->name('books.destroy');
+                Route::get('/', 'index')->name('admin.books.index');
+                Route::post('/', 'store')->name('admin.books.store');
+                Route::get('/{id}', 'show')->name('admin.books.show');
+                Route::post('/{id}', 'update')->name('admin.books.update');
+                Route::delete('/{id}', 'destroy')->name('admin.books.destroy');
             });
         });
     });

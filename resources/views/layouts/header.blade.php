@@ -8,10 +8,7 @@
                 <i class="ki-outline ki-abstract-14 fs-1"></i>
             </div>
 
-            <a href="index.html">
-                <img alt="Logo" src="{{ asset('logo/logo_black.png') }}" class="h-35px theme-light-show" />
-                <img alt="Logo" src="{{ asset('logo/logo_white.png') }}" class="h-35px theme-dark-show" />
-            </a>
+            <img alt="Logo" src="{{ asset('logo.png') }}" class="h-150px" />
         </div>
 
         <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
@@ -39,7 +36,7 @@
                                     <div class="fw-bold d-flex align-items-center fs-5">
                                         {{ Auth::user()->name }}
                                         <span class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">
-                                            Admin
+                                            {{ Auth::user()->getRoleNames()[0] }}
                                         </span>
                                     </div>
                                     <a href="#" class="fw-semibold text-muted text-hover-primary fs-7">
